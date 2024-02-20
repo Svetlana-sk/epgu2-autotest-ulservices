@@ -1,0 +1,428 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- edited with XMLSpy v2019 rel. 3 sp1 (x64) (http://www.altova.com) by  (RT LABS, AO) -->
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:ns1="https://www.gosuslugi.ru/concentrator/license/1.0.1"
+  targetNamespace="https://www.gosuslugi.ru/concentrator/license/1.0.1" elementFormDefault="qualified"
+  attributeFormDefault="unqualified">
+    <xs:element name="InputData" type="ns1:Request">
+        <xs:annotation>
+            <xs:documentation>Входные данные</xs:documentation>
+        </xs:annotation>
+    </xs:element>
+    <xs:element name="OutputData" type="ns1:OutputDataType">
+        <xs:annotation>
+            <xs:documentation>Выходные данные</xs:documentation>
+        </xs:annotation>
+    </xs:element>
+    <xs:complexType name="Request">
+        <xs:annotation>
+            <xs:documentation>Форма запроса</xs:documentation>
+        </xs:annotation>
+        <xs:sequence>
+            <xs:element name="RouteNumber" type="xs:string">
+                <xs:annotation>
+                    <xs:documentation>Код маршрутизации</xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="SpecificLicenseRequest" type="ns1:SpecificLicenseRequestType">
+                <xs:annotation>
+                    <xs:documentation>Информация, которая не выводится в форму запроса, но направляется в лицензирующий
+                        орган
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="LicenseInfo" type="ns1:LicenseInfoType">
+                <xs:annotation>
+                    <xs:documentation>Информация, которая выводится в форму запроса</xs:documentation>
+                </xs:annotation>
+            </xs:element>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="SpecificLicenseRequestType">
+        <xs:annotation>
+            <xs:documentation>Подача заявления о предоставлении сведений о конкретной лицензии</xs:documentation>
+        </xs:annotation>
+        <xs:sequence>
+            <xs:element name="orderId" type="ns1:string-20">
+                <xs:annotation>
+                    <xs:documentation>Номер заявления ЕПГУ</xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="StatementDate" type="xs:date">
+                <xs:annotation>
+                    <xs:documentation>Дата заявления ЕПГУ</xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="ApplicantID" type="ns1:string-20">
+                <xs:annotation>
+                    <xs:documentation>id заявителя на ЕПГУ (OID ЕСИА)</xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="Department" type="xs:string">
+                <xs:annotation>
+                    <xs:documentation>Код ведомства</xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="ServiceCode" type="xs:string">
+                <xs:annotation>
+                    <xs:documentation>Код услуги</xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="TargetCode" type="xs:string">
+                <xs:annotation>
+                    <xs:documentation>Код цели</xs:documentation>
+                </xs:annotation>
+            </xs:element>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="LicenseInfoType">
+        <xs:annotation>
+            <xs:documentation>Информация, которая выводится в форму запроса</xs:documentation>
+        </xs:annotation>
+        <xs:sequence>
+            <xs:element name="InformationForm">
+                <xs:annotation>
+                    <xs:documentation>Форма предоставляемых на основании запроса сведений</xs:documentation>
+                </xs:annotation>
+                <xs:complexType>
+                    <xs:choice>
+                        <xs:element name="EFRL" type="xs:boolean">
+                            <xs:annotation>
+                                <xs:documentation>Выписка из реестра лицензий</xs:documentation>
+                            </xs:annotation>
+                        </xs:element>
+                        <xs:element name="CopyAct" type="xs:boolean">
+                            <xs:annotation>
+                                <xs:documentation>Копия акта лицензирующего органа о принятом решении</xs:documentation>
+                            </xs:annotation>
+                        </xs:element>
+                    </xs:choice>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="ApplicationFormPersonInfo">
+                <xs:annotation>
+                    <xs:documentation>Данные заявителя формы заявления</xs:documentation>
+                </xs:annotation>
+                <xs:complexType>
+                    <xs:choice>
+                        <xs:element name="Personal">
+                            <xs:annotation>
+                                <xs:documentation>Физическое лицо</xs:documentation>
+                            </xs:annotation>
+                            <xs:complexType>
+                                <xs:sequence>
+                                    <xs:element name="LastName" type="ns1:string-100" minOccurs="0">
+                                        <xs:annotation>
+                                            <xs:documentation>Фамилия</xs:documentation>
+                                        </xs:annotation>
+                                    </xs:element>
+                                    <xs:element name="FirstName" type="ns1:string-100" minOccurs="0">
+                                        <xs:annotation>
+                                            <xs:documentation>Имя</xs:documentation>
+                                        </xs:annotation>
+                                    </xs:element>
+                                    <xs:element name="MiddleName" type="ns1:string-100" minOccurs="0">
+                                        <xs:annotation>
+                                            <xs:documentation>Отчество</xs:documentation>
+                                        </xs:annotation>
+                                    </xs:element>
+                                    <xs:element name="INN" type="ns1:string-12" minOccurs="0">
+                                        <xs:annotation>
+                                            <xs:documentation>ИНН физического лица</xs:documentation>
+                                        </xs:annotation>
+                                    </xs:element>
+                                    <xs:element name="Email" type="ns1:string-256" minOccurs="0">
+                                        <xs:annotation>
+                                            <xs:documentation>Адрес электронной почты</xs:documentation>
+                                        </xs:annotation>
+                                    </xs:element>
+                                </xs:sequence>
+                            </xs:complexType>
+                        </xs:element>
+                        <xs:element name="Company">
+                            <xs:annotation>
+                                <xs:documentation>>Юридическое лицо</xs:documentation>
+                            </xs:annotation>
+                            <xs:complexType>
+                                <xs:sequence>
+                                    <xs:element name="CompanyFullName" type="xs:string" minOccurs="0">
+                                        <xs:annotation>
+                                            <xs:documentation>Полное наименование компании</xs:documentation>
+                                        </xs:annotation>
+                                    </xs:element>
+                                    <xs:element name="CompanyShortName" type="xs:string" minOccurs="0">
+                                        <xs:annotation>
+                                            <xs:documentation>Сокращенное наименование компании</xs:documentation>
+                                        </xs:annotation>
+                                    </xs:element>
+                                    <xs:element name="INN" type="ns1:string-10" minOccurs="0">
+                                        <xs:annotation>
+                                            <xs:documentation>ИНН юридического лица</xs:documentation>
+                                        </xs:annotation>
+                                    </xs:element>
+                                    <xs:element name="OGRN" type="ns1:string-13" minOccurs="0">
+                                        <xs:annotation>
+                                            <xs:documentation>ОГРН юридического лица</xs:documentation>
+                                        </xs:annotation>
+                                    </xs:element>
+                                    <xs:element name="Email" type="ns1:string-256" minOccurs="0">
+                                        <xs:annotation>
+                                            <xs:documentation>Адрес электронной почты</xs:documentation>
+                                        </xs:annotation>
+                                    </xs:element>
+                                </xs:sequence>
+                            </xs:complexType>
+                        </xs:element>
+                        <xs:element name="Individual">
+                            <xs:annotation>
+                                <xs:documentation>Индивидуальный предприниматель</xs:documentation>
+                            </xs:annotation>
+                            <xs:complexType>
+                                <xs:sequence>
+                                    <xs:element name="LastName" type="ns1:string-100" minOccurs="0">
+                                        <xs:annotation>
+                                            <xs:documentation>Фамилия</xs:documentation>
+                                        </xs:annotation>
+                                    </xs:element>
+                                    <xs:element name="FirstName" type="ns1:string-100" minOccurs="0">
+                                        <xs:annotation>
+                                            <xs:documentation>Имя</xs:documentation>
+                                        </xs:annotation>
+                                    </xs:element>
+                                    <xs:element name="MiddleName" type="ns1:string-100" minOccurs="0">
+                                        <xs:annotation>
+                                            <xs:documentation>Отчество</xs:documentation>
+                                        </xs:annotation>
+                                    </xs:element>
+                                    <xs:element name="INN" type="ns1:string-12" minOccurs="0">
+                                        <xs:annotation>
+                                            <xs:documentation>ИНН индивидуального предпринимателя</xs:documentation>
+                                        </xs:annotation>
+                                    </xs:element>
+                                    <xs:element name="OGRNIP" type="ns1:string-15" nillable="0" minOccurs="0">
+                                        <xs:annotation>
+                                            <xs:documentation>ОГРНИП индивидуального предпринимателя</xs:documentation>
+                                        </xs:annotation>
+                                    </xs:element>
+                                    <xs:element name="Email" type="ns1:string-256" minOccurs="0">
+                                        <xs:annotation>
+                                            <xs:documentation>Адрес электронной почты</xs:documentation>
+                                        </xs:annotation>
+                                    </xs:element>
+                                </xs:sequence>
+                            </xs:complexType>
+                        </xs:element>
+                    </xs:choice>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="LicenseType" type="ns1:DataElementType">
+                <xs:annotation>
+                    <xs:documentation>Вид лицензирования</xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="CompetentOrganization" type="ns1:DataElementType">
+                <xs:annotation>
+                    <xs:documentation>Лицензирующий орган</xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="RegionCompetentOrganization" type="ns1:DataElementType" minOccurs="0">
+                <xs:annotation>
+                    <xs:documentation>Регион лицензирующего органа</xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="LicenseStatus" type="ns1:DataElementType" minOccurs="0">
+                <xs:annotation>
+                    <xs:documentation>Статус лицензии</xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="LicenseeInfo">
+                <xs:annotation>
+                    <xs:documentation>Сведения о лицензиате</xs:documentation>
+                </xs:annotation>
+                <xs:complexType>
+                    <xs:choice>
+                        <xs:element name="LicenseNumber" type="ns1:string-100">
+                            <xs:annotation>
+                                <xs:documentation>Номер лицензии</xs:documentation>
+                            </xs:annotation>
+                        </xs:element>
+                        <xs:element name="LicenseCompany">
+                            <xs:annotation>
+                                <xs:documentation>Лицензиат юридическое лицо</xs:documentation>
+                            </xs:annotation>
+                            <xs:complexType>
+                                <xs:choice>
+                                    <xs:element name="INN" type="ns1:string-10">
+                                        <xs:annotation>
+                                            <xs:documentation>ИНН юридического лица</xs:documentation>
+                                        </xs:annotation>
+                                    </xs:element>
+                                    <xs:element name="OGRN" type="ns1:string-13">
+                                        <xs:annotation>
+                                            <xs:documentation>ОГРН юридического лица</xs:documentation>
+                                        </xs:annotation>
+                                    </xs:element>
+                                </xs:choice>
+                            </xs:complexType>
+                        </xs:element>
+                        <xs:element name="LicenseIndividual">
+                            <xs:annotation>
+                                <xs:documentation>Лицензиат индивидуальный предприниматель</xs:documentation>
+                            </xs:annotation>
+                            <xs:complexType>
+                                <xs:choice>
+                                    <xs:element name="INN" type="ns1:string-12">
+                                        <xs:annotation>
+                                            <xs:documentation>ИНН индивидуального предпринимателя</xs:documentation>
+                                        </xs:annotation>
+                                    </xs:element>
+                                    <xs:element name="OGRNIP" type="ns1:string-15">
+                                        <xs:annotation>
+                                            <xs:documentation>ОГРНИП индивидуального предпринимателя</xs:documentation>
+                                        </xs:annotation>
+                                    </xs:element>
+                                </xs:choice>
+                            </xs:complexType>
+                        </xs:element>
+                    </xs:choice>
+                </xs:complexType>
+            </xs:element>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="OutputDataType">
+        <xs:annotation>
+            <xs:documentation xml:lang="ru">Элемент с информацией о факте получения/ошибки</xs:documentation>
+        </xs:annotation>
+        <xs:sequence>
+            <xs:element name="changeOrderInfo" type="ns1:changeOrderInfoType">
+                <xs:annotation>
+                    <xs:documentation>Информация для изменения статуса заявления в ЛК ЕПГУ</xs:documentation>
+                </xs:annotation>
+            </xs:element>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="statusCodeType">
+        <xs:annotation>
+            <xs:documentation>Статус заявления</xs:documentation>
+        </xs:annotation>
+        <xs:choice>
+            <xs:element name="techCode" type="xs:byte">
+                <xs:annotation>
+                    <xs:documentation>Код статуса на ЕПГУ</xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="orgCode" type="xs:byte">
+                <xs:annotation>
+                    <xs:documentation>Код статуса в ведомстве</xs:documentation>
+                </xs:annotation>
+            </xs:element>
+        </xs:choice>
+    </xs:complexType>
+    <xs:simpleType name="string-100">
+        <xs:annotation>
+            <xs:documentation></xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:string">
+            <xs:maxLength value="100"/>
+        </xs:restriction>
+    </xs:simpleType>
+    <xs:simpleType name="string-10">
+        <xs:annotation>
+            <xs:documentation></xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:string">
+            <xs:maxLength value="10"/>
+        </xs:restriction>
+    </xs:simpleType>
+    <xs:simpleType name="string-12">
+        <xs:annotation>
+            <xs:documentation></xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:string">
+            <xs:maxLength value="12"/>
+        </xs:restriction>
+    </xs:simpleType>
+    <xs:simpleType name="string-13">
+        <xs:annotation>
+            <xs:documentation></xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:string">
+            <xs:maxLength value="13"/>
+        </xs:restriction>
+    </xs:simpleType>
+    <xs:simpleType name="string-15">
+        <xs:annotation>
+            <xs:documentation></xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:string">
+            <xs:maxLength value="15"/>
+        </xs:restriction>
+    </xs:simpleType>
+    <xs:simpleType name="string-20">
+        <xs:annotation>
+            <xs:documentation></xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:string">
+            <xs:maxLength value="20"/>
+        </xs:restriction>
+    </xs:simpleType>
+    <xs:simpleType name="string-50">
+        <xs:annotation>
+            <xs:documentation></xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:string">
+            <xs:maxLength value="50"/>
+        </xs:restriction>
+    </xs:simpleType>
+    <xs:simpleType name="string-256">
+        <xs:annotation>
+            <xs:documentation></xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:string">
+            <xs:maxLength value="256"/>
+        </xs:restriction>
+    </xs:simpleType>
+    <xs:simpleType name="string-2048">
+        <xs:annotation>
+            <xs:documentation></xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:string">
+            <xs:maxLength value="2048"/>
+        </xs:restriction>
+    </xs:simpleType>
+    <xs:complexType name="LicenseCompanyType">
+        <xs:simpleContent>
+            <xs:extension base="ns1:string-100"/>
+        </xs:simpleContent>
+    </xs:complexType>
+    <xs:complexType name="DataElementType">
+        <xs:simpleContent>
+            <xs:extension base="xs:string">
+                <xs:attribute name="code" type="xs:string" use="required"/>
+            </xs:extension>
+        </xs:simpleContent>
+    </xs:complexType>
+    <xs:complexType name="changeOrderInfoType">
+        <xs:annotation>
+            <xs:documentation>
+                Информация для изменения статуса заявления в ЛК ЕПГУ
+            </xs:documentation>
+        </xs:annotation>
+        <xs:sequence>
+            <xs:element name="orderId" type="xs:long">
+                <xs:annotation>
+                    <xs:documentation>Номер заявки в ЛК ЕПГУ</xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="statusCode" type="ns1:statusCodeType">
+                <xs:annotation>
+                    <xs:documentation>Новый статус заявления</xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="comment" type="ns1:string-2048">
+                <xs:annotation>
+                    <xs:documentation>Коментарий</xs:documentation>
+                </xs:annotation>
+            </xs:element>
+        </xs:sequence>
+    </xs:complexType>
+</xs:schema>
