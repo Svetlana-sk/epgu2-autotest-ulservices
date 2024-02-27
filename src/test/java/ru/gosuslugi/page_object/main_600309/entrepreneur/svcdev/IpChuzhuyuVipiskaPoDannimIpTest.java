@@ -5,6 +5,9 @@ import com.codeborne.selenide.Configuration;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.openqa.selenium.Cookie;
+import ru.gosuslugi.api.steps.LkApiSteps;
+import ru.gosuslugi.listeners.BrowserTrafficTestListener;
 import ru.gosuslugi.page_object.main_600309.AuthPage;
 import ru.gosuslugi.page_object.main_600309.BaseTest;
 import ru.gosuslugi.page_object.main_600309.FormPage;
@@ -12,15 +15,23 @@ import ru.gosuslugi.page_object.main_600309.FormPage;
 //[600309] [ИП] Чужую. Выписка из реестра по данным предпринимателя
 public class IpChuzhuyuVipiskaPoDannimIpTest extends BaseTest {
 
+
+    private BrowserTrafficTestListener listener;
+    private LkApiSteps lkApiSteps;
+    private String accToken;
+
     @BeforeEach
     public void setup() {
         Configuration.browser = "chrome";
+        listener = new BrowserTrafficTestListener(driver);
+        lkApiSteps = new LkApiSteps();
     }
 
     @AfterEach
     public void tearDown() {
+        String orderId = listener.getOrderId();
+        System.out.println(orderId);
     }
-
 
     @Test
     public void positiveCase() {
@@ -36,7 +47,7 @@ public class IpChuzhuyuVipiskaPoDannimIpTest extends BaseTest {
                 .clickChuzhuyuButton()
                 .clickVipiskaButton()
                 .clickGoToApplicationButton()
-                .enterTheTypeOfActivity()
+                .enterTheTypeOfActivity("Азартные игры")
                 .chooseTheElement()
                 .clickNextButton()
                 .clickEntrepreneurDataButton()
@@ -44,6 +55,16 @@ public class IpChuzhuyuVipiskaPoDannimIpTest extends BaseTest {
                 .clickElementOutsideInputField()
                 .clickCheckLicenseNumber()
                 .availableFinalButton();
+
+        if (accToken == null) {
+            Cookie cookie = driver.getWebDriver().manage().getCookieNamed("acc_t");
+            if (cookie != null) {
+                accToken = cookie.getValue();
+            }
+        }
+        String orderId = listener.getOrderId();
+
+        lkApiSteps.getOrderStatus(accToken, orderId);
 
     }
 

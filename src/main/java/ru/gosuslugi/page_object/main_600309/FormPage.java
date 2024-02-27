@@ -90,8 +90,8 @@ public class FormPage extends BasePage {
         return this;
     }
 
-    public FormPage enterTheTypeOfActivity() {
-        theTypeOfActivity.shouldBe(Condition.visible).click();
+    public FormPage enterTheTypeOfActivity(String number) {
+        theTypeOfActivity.shouldBe(Condition.visible).setValue(number);
         return this;
     }
 
